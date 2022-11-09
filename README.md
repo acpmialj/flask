@@ -43,4 +43,6 @@ Hostname: 9b71507f400a
 Visits: cannot connect to Redis, counter disabled
 ```
 
+El error en el apartado "Visits:" es porque no hay servidor Redis en ejecución. 
+
 Al cerrar la aplicación se elimina la imagen.
