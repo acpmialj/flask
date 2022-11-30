@@ -1,11 +1,13 @@
 services:
   web:
     build: .
+    deploy:
+      mode: replicated
+      replicas: 2
   redis:
     image: redis
     volumes:
       - "./data:/data"
-    command: redis-server --appendonly yes
   nginx:
     image: nginx:latest
     volumes: 
