@@ -1,16 +1,16 @@
 services:
-    web:
-        build: .
-    redis:
-        image: redis
-        volumes:
-            - "./data:/data"
-        command: redis-server --appendonly yes
-    lb:
-        image: dockercloud/haproxy
-        ports:
-            - 4000:80
-        links:
-            - web
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
+  web:
+    build: .
+  redis:
+    image: redis
+    volumes:
+      - "./data:/data"
+    command: redis-server --appendonly yes
+  nginx:
+    image: nginx:latest
+    volumes: 
+      - $PWD:/etc/nginx:ro
+    depends_on:
+      - web
+    ports:
+      - "4000:4000"
