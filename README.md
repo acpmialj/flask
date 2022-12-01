@@ -1,4 +1,27 @@
-# flask
+# Python/Flask web app
+
+Se facilitan todos los elementos para la puesta en marcha de una aplicación web implementada con Flask. Para su funcionamiento requiere un servidor Redis. El fichero Compose "compose_simple.yaml" contiene lo necesario para lanzarla. El proceso incluye la construcción de una imagen de la aplicación web, para lo que se incluye el correspondiente Dockerfile. 
+
+Renombrar o copiar el fichero Compose citado como "compose.yaml". Lanzar el sistema con "docker compose up -d". Una conexión a "http://localhost:4000" dará acceso a la aplicación. En el navegador aparecerá
+
+```shell
+Hello World!
+Hostname: 9b71507f400a <-- este valor es siempre el mismo, el nombre dado por Docker al servidor web
+Visits: 3              <-- esto se incrementará de uno en uno cada vez que hay un acceso
+```
+
+# Haciendo la aplicación escalable con un balanceador de carga
+
+Añadimos a la aplicación anterior un balanceador de carga basado en Nginx. El fichero Compose correspondiente es "compose_lb.yaml". Se necesita además un fichero de configuración para Nginx, ya incluido. Renombrar o copiar este fichero como "compose.yaml" y ejecutar la aplicación como antes ("docker compose up -d"), lo que lanzará dos instancias del servidor web. La conexión a "http://localhost:4000" se conecta a Nginx, que redirigirá el tráfico hacia uno cualquiera de los servidores reales:
+
+```shell
+Hello World!
+Hostname: 9b71507f400a <-- esto cambiará en función del número de servidores
+Visits: 3              <-- esto se incrementará de uno en uno cada vez que hay un acceso
+```
+
+
+
 Los pasos a dar para ejecutar la aplicación son
 ```shell
 $ mkdir flask
