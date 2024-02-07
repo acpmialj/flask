@@ -11,7 +11,7 @@ services:
   nginx:
     image: nginx:latest
     volumes: 
-      - $PWD:/etc/nginx:ro
+      - $PWD:/etc/nginx/conf.d:ro
     depends_on:
       - web
     ports:
